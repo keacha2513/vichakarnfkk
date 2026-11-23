@@ -38,7 +38,7 @@
 
   <!-- แถบเมนูด้านบน (ซ่อนตอนสั่งพิมพ์) -->
   <header class="bg-emerald-800 dark:bg-emerald-950 text-white shadow-md no-print border-b border-emerald-700 dark:border-emerald-900">
-    <div class="max-w-5xl mx-auto px-4 py-3.5 flex flex-col sm:flex-row justify-between items-center gap-3">
+    <div class="max-w-6xl mx-auto px-4 py-3.5 flex flex-col sm:flex-row justify-between items-center gap-3">
       
       <!-- ชื่อระบบและโรงเรียน -->
       <div class="text-center sm:text-left">
@@ -53,7 +53,7 @@
             ส่งงานวิชาการ
           </button>
           <button id="tab-admin" onclick="requestAdminAccess()" class="px-3.5 py-1.5 rounded-md text-xs sm:text-sm font-medium text-emerald-100 hover:text-white transition">
-            หลังบ้าน / พิมพ์สรุป
+            หลังบ้านวิชาการ
           </button>
         </div>
 
@@ -80,7 +80,7 @@
     </div>
   </header>
 
-  <main class="flex-grow max-w-5xl w-full mx-auto px-4 py-6 print-container">
+  <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-6 print-container">
 
     <!-- ==================== ส่วนที่ 1: หน้าส่งงานสำหรับครู ==================== -->
     <section id="view-submit" class="max-w-2xl mx-auto bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-emerald-100 dark:border-slate-700 p-5 sm:p-8 no-print transition-colors">
@@ -107,7 +107,6 @@
             <div>
               <select id="academicYear" required class="w-full rounded-lg border border-slate-300 dark:border-slate-600 px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 bg-white dark:bg-slate-700 dark:text-white">
                 <option value="">-- ปีการศึกษา --</option>
-                <!-- สร้างตัวเลือกปี 2569 - 2589 อัตโนมัติ -->
               </select>
             </div>
           </div>
@@ -196,49 +195,70 @@
       </form>
     </section>
 
-    <!-- ==================== ส่วนที่ 2: ระบบหลังบ้าน & พิมพ์สรุป ==================== -->
+    <!-- ==================== ส่วนที่ 2: ระบบหลังบ้านวิชาการ ==================== -->
     <section id="view-admin" class="hidden bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-emerald-100 dark:border-slate-700 p-5 sm:p-8 print-container transition-colors">
       
-      <!-- แถบควบคุมตัวกรองและปุ่มพิมพ์ (ซ่อนตอนสั่งพิมพ์) -->
+      <!-- แถบหัวข้อ + เมนูย่อยหลังบ้าน + ตัวกรองหลัก (ซ่อนตอนสั่งพิมพ์) -->
       <div class="no-print border-b border-slate-200 dark:border-slate-700 pb-5 mb-6">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
           <div class="flex items-center gap-3">
             <div class="w-2 h-8 bg-emerald-600 rounded-full"></div>
             <div>
-              <h2 class="text-lg font-bold text-emerald-900 dark:text-emerald-400">ระบบสรุปรายงานส่งงานวิชาการ (สำหรับเจ้าหน้าที่)</h2>
-              <p class="text-xs text-slate-500 dark:text-slate-400">เลือกภาคเรียนและกลุ่มสาระฯ เพื่อตรวจสอบลิงก์ หรือกดสั่งพิมพ์เสนอผู้อำนวยการ</p>
+              <h2 class="text-lg font-bold text-emerald-900 dark:text-emerald-400">ระบบจัดการงานวิชาการ (สำหรับเจ้าหน้าที่)</h2>
+              <p class="text-xs text-slate-500 dark:text-slate-400">เปิดดูลิงก์งานที่ครูส่งเข้ามา หรือพิมพ์แบบสรุปรายงานเสนอผู้อำนวยการ</p>
             </div>
           </div>
           <div class="flex flex-wrap gap-2 w-full sm:w-auto">
-            <button onclick="fetchDataFromSheet()" class="flex-1 sm:flex-none bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 px-4 py-2 rounded-lg text-sm font-medium transition">
-              รีเฟรชข้อมูล
+            <button onclick="fetchDataFromSheet()" class="flex-1 sm:flex-none bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 px-4 py-2 rounded-lg text-sm font-medium transition flex items-center justify-center gap-1.5">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+              <span>รีเฟรชข้อมูล</span>
             </button>
-            <button onclick="window.print()" class="flex-1 sm:flex-none bg-emerald-700 hover:bg-emerald-800 text-white px-5 py-2 rounded-lg text-sm font-semibold shadow transition">
-              พิมพ์สรุปเสนอ ผอ. (A4)
-            </button>
-            <button onclick="logoutAdmin()" class="flex-1 sm:flex-none bg-rose-50 dark:bg-rose-950/60 hover:bg-rose-100 dark:hover:bg-rose-900 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800 px-4 py-2 rounded-lg text-sm font-medium transition">
-              ออกจากระบบ
+            <button onclick="printOfficialSummary()" class="flex-1 sm:flex-none bg-emerald-700 hover:bg-emerald-800 text-white px-5 py-2 rounded-lg text-sm font-semibold shadow transition flex items-center justify-center gap-1.5">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+              </svg>
+              <span>พิมพ์สรุปเสนอ ผอ. (A4)</span>
             </button>
           </div>
         </div>
 
+        <!-- เมนูย่อยสลับหน้าในหลังบ้าน: 1. ดูงานที่ครูส่ง | 2. ตารางสรุปเสนอ ผอ. -->
+        <div class="flex flex-wrap gap-2 mb-4 bg-slate-100 dark:bg-slate-900/70 p-1.5 rounded-xl border border-slate-200 dark:border-slate-700">
+          <button id="subtab-submissions" onclick="switchAdminSubTab('submissions')" class="flex-1 sm:flex-none px-4 py-2 rounded-lg text-sm font-semibold bg-emerald-700 text-white shadow transition flex items-center justify-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+            </svg>
+            <span>ดูงานที่ครูส่ง (เปิดลิงก์)</span>
+            <span id="subCountBadge" class="text-xs px-2 py-0.5 rounded-full bg-white/20 text-white">0</span>
+          </button>
+
+          <button id="subtab-summary" onclick="switchAdminSubTab('summary')" class="flex-1 sm:flex-none px-4 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-white/60 dark:hover:bg-slate-800 transition flex items-center justify-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            <span>ตารางสรุป / พิมพ์เสนอ ผอ.</span>
+          </button>
+        </div>
+
+        <!-- ตัวกรองหลัก (ใช้ร่วมกันทั้ง 2 เมนู) -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 bg-emerald-50/60 dark:bg-slate-700/50 p-4 rounded-xl border border-emerald-100 dark:border-slate-600">
           <div>
             <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">ภาคเรียน</label>
-            <select id="adminSemesterTerm" onchange="renderSummaryTable()" class="w-full rounded-lg border border-slate-300 dark:border-slate-600 px-3 py-2 text-sm bg-white dark:bg-slate-700 dark:text-white">
+            <select id="adminSemesterTerm" onchange="refreshAdminViews()" class="w-full rounded-lg border border-slate-300 dark:border-slate-600 px-3 py-2 text-sm bg-white dark:bg-slate-700 dark:text-white">
               <option value="1">ภาคเรียนที่ 1</option>
               <option value="2">ภาคเรียนที่ 2</option>
             </select>
           </div>
           <div>
             <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">ปีการศึกษา</label>
-            <select id="adminAcademicYear" onchange="renderSummaryTable()" class="w-full rounded-lg border border-slate-300 dark:border-slate-600 px-3 py-2 text-sm bg-white dark:bg-slate-700 dark:text-white">
-              <!-- สร้างตัวเลือกปี 2569 - 2589 อัตโนมัติ -->
+            <select id="adminAcademicYear" onchange="refreshAdminViews()" class="w-full rounded-lg border border-slate-300 dark:border-slate-600 px-3 py-2 text-sm bg-white dark:bg-slate-700 dark:text-white">
             </select>
           </div>
           <div>
             <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">กลุ่มสาระการเรียนรู้</label>
-            <select id="adminDepartment" onchange="renderSummaryTable()" class="w-full rounded-lg border border-slate-300 dark:border-slate-600 px-3 py-2 text-sm bg-white dark:bg-slate-700 dark:text-white">
+            <select id="adminDepartment" onchange="refreshAdminViews()" class="w-full rounded-lg border border-slate-300 dark:border-slate-600 px-3 py-2 text-sm bg-white dark:bg-slate-700 dark:text-white">
               <option value="ALL">ทุกกลุ่มสาระการเรียนรู้ (รวมทั้งโรงเรียน)</option>
               <option value="ภาษาไทย">ภาษาไทย</option>
               <option value="คณิตศาสตร์">คณิตศาสตร์</option>
@@ -254,57 +274,103 @@
         </div>
       </div>
 
-      <!-- ส่วนหัวเอกสารราชการ (แสดงทั้งบนหน้าจอและในกระดาษพิมพ์) -->
-      <div class="font-sarabun text-center mb-4">
-        <h3 class="text-lg font-bold text-slate-900 dark:text-white">แบบสรุปการส่งเอกสารงานวิชาการ ภาคเรียนที่ <span id="printSemesterLabel">2/2569</span></h3>
-        <p class="text-base font-semibold text-slate-800 dark:text-slate-200">โรงเรียนฟากกว๊านวิทยาคม สำนักงานเขตพื้นที่การศึกษามัธยมศึกษาพะเยา</p>
-        <p class="text-sm text-slate-700 dark:text-slate-300 mt-0.5">กลุ่มสาระการเรียนรู้: <span id="printDeptLabel" class="font-bold">ทุกกลุ่มสาระการเรียนรู้</span></p>
+      <!-- ==================== เมนูย่อย 2.1: ดูงานที่ครูส่ง (เปิดลิงก์โดยตรง) ==================== -->
+      <div id="admin-subview-submissions" class="no-print space-y-4">
+        <!-- ตัวกรองเสริมเฉพาะหน้าดูงาน: ประเภทเอกสาร + ค้นหา -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">กรองตามประเภทเอกสาร</label>
+            <select id="filterDocType" onchange="renderSubmissionsList()" class="w-full rounded-lg border border-slate-300 dark:border-slate-600 px-3 py-2 text-sm bg-white dark:bg-slate-700 dark:text-white">
+              <option value="ALL">ทุกประเภทเอกสาร (7 รายการ)</option>
+              <option value="โครงการสอน">1. โครงการสอน</option>
+              <option value="แผนการจัดการเรียนรู้">2. แผนการจัดการเรียนรู้</option>
+              <option value="ปพ.5">3. ปพ.5</option>
+              <option value="วิจัยในชั้นเรียน">4. วิจัยในชั้นเรียน</option>
+              <option value="สื่อและนวัตกรรมการจัดการเรียนรู้">5. สื่อและนวัตกรรมการจัดการเรียนรู้</option>
+              <option value="วิเคราะห์ผู้เรียน">6. วิเคราะห์ผู้เรียน</option>
+              <option value="วิเคราะห์ข้อสอบ">7. วิเคราะห์ข้อสอบ</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">ค้นหาชื่อครู / รหัสวิชา / ชื่อวิชา</label>
+            <input type="text" id="searchSubmissionInput" oninput="renderSubmissionsList()" placeholder="พิมพ์คำค้นหา..." class="w-full rounded-lg border border-slate-300 dark:border-slate-600 px-3.5 py-2 text-sm bg-white dark:bg-slate-700 dark:text-white focus:ring-2 focus:ring-emerald-600">
+          </div>
+        </div>
+
+        <!-- ตารางรายการงานที่ครูส่ง -->
+        <div class="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-700">
+          <table class="w-full border-collapse text-xs sm:text-sm">
+            <thead>
+              <tr class="bg-emerald-800 dark:bg-emerald-950 text-white text-left">
+                <th class="py-3 px-3 text-center w-12">ที่</th>
+                <th class="py-3 px-3 w-32">วัน-เวลาที่ส่ง</th>
+                <th class="py-3 px-3 min-w-[170px]">ชื่อ - สกุล / กลุ่มสาระฯ</th>
+                <th class="py-3 px-3 min-w-[150px]">ประเภทเอกสาร</th>
+                <th class="py-3 px-3 min-w-[170px]">รายวิชา / ระดับชั้น</th>
+                <th class="py-3 px-3 text-center w-36">เปิดตรวจงาน</th>
+              </tr>
+            </thead>
+            <tbody id="submissionsListBody" class="divide-y divide-slate-200 dark:divide-slate-700">
+              <!-- สร้างรายการด้วย JavaScript -->
+            </tbody>
+          </table>
+        </div>
       </div>
 
-      <!-- ตารางสรุปผลการส่งงาน 7 รายการ -->
-      <div class="overflow-x-auto font-sarabun">
-        <table class="w-full border-collapse border border-slate-400 dark:border-slate-600 text-xs sm:text-sm">
-          <thead>
-            <tr class="bg-emerald-50 dark:bg-slate-700 text-center text-slate-900 dark:text-slate-100">
-              <th class="border border-slate-400 dark:border-slate-600 py-2 px-2 w-10">ที่</th>
-              <th class="border border-slate-400 dark:border-slate-600 py-2 px-3 text-left min-w-[160px]">ชื่อ - สกุล</th>
-              <th class="border border-slate-400 dark:border-slate-600 py-2 px-2 w-24">ตำแหน่ง</th>
-              <th class="border border-slate-400 dark:border-slate-600 py-2 px-1 w-20">โครงการสอน</th>
-              <th class="border border-slate-400 dark:border-slate-600 py-2 px-1 w-20">แผนฯ</th>
-              <th class="border border-slate-400 dark:border-slate-600 py-2 px-1 w-16">ปพ.5</th>
-              <th class="border border-slate-400 dark:border-slate-600 py-2 px-1 w-20">วิจัยฯ</th>
-              <th class="border border-slate-400 dark:border-slate-600 py-2 px-1 w-24">สื่อ/นวัตกรรม</th>
-              <th class="border border-slate-400 dark:border-slate-600 py-2 px-1 w-24">วิเคราะห์ผู้เรียน</th>
-              <th class="border border-slate-400 dark:border-slate-600 py-2 px-1 w-24">วิเคราะห์ข้อสอบ</th>
-            </tr>
-          </thead>
-          <tbody id="summaryTableBody">
-            <!-- ข้อมูลจะถูกสร้างด้วย JavaScript -->
-          </tbody>
-        </table>
-      </div>
-
-      <p class="text-xs text-slate-500 dark:text-slate-400 mt-2 no-print">* หมายเหตุ: คลิกที่เครื่องหมาย <span class="text-emerald-600 dark:text-emerald-400 font-bold">✓</span> ในตารางเพื่อดูรายวิชาและเปิดลิงก์ตรวจเอกสาร</p>
-
-      <!-- ส่วนลงนามท้ายกระดาษ (3 ช่องสำหรับเอกสารราชการ) -->
-      <div class="font-sarabun grid grid-cols-3 gap-4 mt-10 pt-4 text-center text-sm text-slate-900 dark:text-slate-200">
-        <div>
-          <p>ลงชื่อ......................................................</p>
-          <p class="mt-1">(......................................................)</p>
-          <p class="mt-0.5">เจ้าหน้าที่งานวิชาการ</p>
-          <p class="mt-0.5">วันที่ ........../........../..........</p>
+      <!-- ==================== เมนูย่อย 2.2: ตารางสรุป & พิมพ์เสนอ ผอ. ==================== -->
+      <div id="admin-subview-summary" class="hidden">
+        <!-- ส่วนหัวเอกสารราชการ (แสดงทั้งบนหน้าจอและในกระดาษพิมพ์) -->
+        <div class="font-sarabun text-center mb-4">
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white">แบบสรุปการส่งเอกสารงานวิชาการ ภาคเรียนที่ <span id="printSemesterLabel">2/2569</span></h3>
+          <p class="text-base font-semibold text-slate-800 dark:text-slate-200">โรงเรียนฟากกว๊านวิทยาคม สำนักงานเขตพื้นที่การศึกษามัธยมศึกษาพะเยา</p>
+          <p class="text-sm text-slate-700 dark:text-slate-300 mt-0.5">กลุ่มสาระการเรียนรู้: <span id="printDeptLabel" class="font-bold">ทุกกลุ่มสาระการเรียนรู้</span></p>
         </div>
-        <div>
-          <p>ลงชื่อ......................................................</p>
-          <p class="mt-1">(......................................................)</p>
-          <p class="mt-0.5">หัวหน้ากลุ่มบริหารวิชาการ</p>
-          <p class="mt-0.5">วันที่ ........../........../..........</p>
+
+        <!-- ตารางสรุปผลการส่งงาน 7 รายการ -->
+        <div class="overflow-x-auto font-sarabun">
+          <table class="w-full border-collapse border border-slate-400 dark:border-slate-600 text-xs sm:text-sm">
+            <thead>
+              <tr class="bg-emerald-50 dark:bg-slate-700 text-center text-slate-900 dark:text-slate-100">
+                <th class="border border-slate-400 dark:border-slate-600 py-2 px-2 w-10">ที่</th>
+                <th class="border border-slate-400 dark:border-slate-600 py-2 px-3 text-left min-w-[160px]">ชื่อ - สกุล</th>
+                <th class="border border-slate-400 dark:border-slate-600 py-2 px-2 w-24">ตำแหน่ง</th>
+                <th class="border border-slate-400 dark:border-slate-600 py-2 px-1 w-20">โครงการสอน</th>
+                <th class="border border-slate-400 dark:border-slate-600 py-2 px-1 w-20">แผนฯ</th>
+                <th class="border border-slate-400 dark:border-slate-600 py-2 px-1 w-16">ปพ.5</th>
+                <th class="border border-slate-400 dark:border-slate-600 py-2 px-1 w-20">วิจัยฯ</th>
+                <th class="border border-slate-400 dark:border-slate-600 py-2 px-1 w-24">สื่อ/นวัตกรรม</th>
+                <th class="border border-slate-400 dark:border-slate-600 py-2 px-1 w-24">วิเคราะห์ผู้เรียน</th>
+                <th class="border border-slate-400 dark:border-slate-600 py-2 px-1 w-24">วิเคราะห์ข้อสอบ</th>
+              </tr>
+            </thead>
+            <tbody id="summaryTableBody">
+              <!-- ข้อมูลจะถูกสร้างด้วย JavaScript -->
+            </tbody>
+          </table>
         </div>
-        <div>
-          <p>ลงชื่อ......................................................</p>
-          <p class="mt-1">(......................................................)</p>
-          <p class="mt-0.5">ผู้อำนวยการโรงเรียนฟากกว๊านวิทยาคม</p>
-          <p class="mt-0.5">วันที่ ........../........../..........</p>
+
+        <p class="text-xs text-slate-500 dark:text-slate-400 mt-2 no-print">* หมายเหตุ: คลิกที่เครื่องหมาย <span class="text-emerald-600 dark:text-emerald-400 font-bold">✓</span> ในตารางเพื่อดูรายวิชาและเปิดลิงก์ตรวจเอกสาร</p>
+
+        <!-- ส่วนลงนามท้ายกระดาษ (3 ช่องสำหรับเอกสารราชการ) -->
+        <div class="font-sarabun grid grid-cols-3 gap-4 mt-10 pt-4 text-center text-sm text-slate-900 dark:text-slate-200">
+          <div>
+            <p>ลงชื่อ......................................................</p>
+            <p class="mt-1">(......................................................)</p>
+            <p class="mt-0.5">เจ้าหน้าที่งานวิชาการ</p>
+            <p class="mt-0.5">วันที่ ........../........../..........</p>
+          </div>
+          <div>
+            <p>ลงชื่อ......................................................</p>
+            <p class="mt-1">(......................................................)</p>
+            <p class="mt-0.5">หัวหน้ากลุ่มบริหารวิชาการ</p>
+            <p class="mt-0.5">วันที่ ........../........../..........</p>
+          </div>
+          <div>
+            <p>ลงชื่อ......................................................</p>
+            <p class="mt-1">(......................................................)</p>
+            <p class="mt-0.5">ผู้อำนวยการโรงเรียนฟากกว๊านวิทยาคม</p>
+            <p class="mt-0.5">วันที่ ........../........../..........</p>
+          </div>
         </div>
       </div>
 
@@ -315,7 +381,7 @@
   <script>
     // ================= ตั้งค่าระบบตรงนี้ =================
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz6-8AJm-DmfreH7LpjowORk_3eWPseDwXPAXxZMIGVSz5nzeTAQvy7DDpzC9a3cs68/exec";
-    const ADMIN_PIN = "adminfkk217"; // รหัสผ่านเข้าหน้าหลังบ้านวิชาการ
+    const ADMIN_PIN = "1234"; // รหัสผ่านเข้าหน้าหลังบ้านวิชาการ
     // ===================================================
 
     const DOC_TYPES = [
@@ -331,6 +397,7 @@
     let allTeachers = [];
     let allSubmissions = [];
     let isAdminLoggedIn = sessionStorage.getItem("fk_admin_auth") === "true";
+    let currentAdminSubTab = "submissions"; // ค่าเริ่มต้นเปิดหน้า "ดูงานที่ครูส่ง"
 
     // เริ่มต้นทำงานเมื่อโหลดหน้าเว็บ
     window.addEventListener("DOMContentLoaded", () => {
@@ -339,6 +406,27 @@
       updateAuthUI();
       fetchDataFromSheet();
     });
+
+    // ฟังก์ชันป้องกันอักขระพิเศษใน HTML
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return "";
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    // แปลงวันที่และเวลาเป็นรูปแบบไทย
+    function formatThaiDateTime(ts) {
+      if (!ts) return "-";
+      const d = new Date(ts);
+      if (isNaN(d.getTime())) return escapeHtml(ts);
+      const datePart = d.toLocaleDateString("th-TH", { day: "2-digit", month: "short", year: "2-digit" });
+      const timePart = d.toLocaleTimeString("th-TH", { hour: "2-digit", minute: "2-digit" });
+      return `${datePart} ${timePart} น.`;
+    }
 
     // ================= 1. ระบบสลับโหมด สว่าง / มืด =================
     function initTheme() {
@@ -366,7 +454,6 @@
 
     // ================= 2. สร้างตัวเลือกปีการศึกษา 2569 - 2589 =================
     function initAcademicYears() {
-      // หน้าส่งงาน: มีหัวข้อ "-- ปีการศึกษา --" และตัวเลข 2569 - 2589
       const submitYearSelect = document.getElementById("academicYear");
       submitYearSelect.innerHTML = '<option value="">-- ปีการศึกษา --</option>';
       for (let y = 2569; y <= 2589; y++) {
@@ -376,7 +463,6 @@
         submitYearSelect.appendChild(opt);
       }
 
-      // หน้าหลังบ้าน: มีตัวเลข 2569 - 2589 พร้อมเลือกปีปัจจุบันเป็นค่าเริ่มต้น
       const adminYearSelect = document.getElementById("adminAcademicYear");
       adminYearSelect.innerHTML = "";
       const now = new Date();
@@ -405,7 +491,7 @@
         if (data.status === "success") {
           allTeachers = data.teachers || [];
           allSubmissions = data.submissions || [];
-          renderSummaryTable();
+          refreshAdminViews();
         }
         Swal.close();
       } catch (err) {
@@ -421,6 +507,7 @@
       const cleanTeacherName = document.getElementById("teacherName").value.trim().replace(/\s+/g, ' ');
 
       const payload = {
+        timestamp: new Date().toISOString(),
         semester: combinedSemester,
         department: document.getElementById("department").value,
         teacherName: cleanTeacherName,
@@ -447,6 +534,7 @@
             confirmButtonColor: '#047857'
           });
           allSubmissions.push(payload);
+          refreshAdminViews();
           document.getElementById("subjectCode").value = "";
           document.getElementById("subjectName").value = "";
           document.getElementById("fileUrl").value = "";
@@ -522,7 +610,7 @@
       });
     }
 
-    // สลับแท็บหน้าจอ
+    // สลับแท็บหลัก (หน้าส่งงาน / หลังบ้าน)
     function switchTab(tab) {
       if (tab === "admin" && !isAdminLoggedIn) {
         requestAdminAccess();
@@ -540,10 +628,138 @@
         ? "px-3.5 py-1.5 rounded-md text-xs sm:text-sm font-medium bg-white text-emerald-900 shadow transition"
         : "px-3.5 py-1.5 rounded-md text-xs sm:text-sm font-medium text-emerald-100 hover:text-white transition";
 
-      if (tab === "admin") renderSummaryTable();
+      if (tab === "admin") {
+        refreshAdminViews();
+      }
     }
 
-    // ================= 5. สร้างตารางสรุปผลหลังบ้าน =================
+    // สลับเมนูย่อยภายในหลังบ้าน ("ดูงานที่ครูส่ง" / "ตารางสรุปเสนอ ผอ.")
+    function switchAdminSubTab(subTab) {
+      currentAdminSubTab = subTab;
+      const isSubmissions = subTab === "submissions";
+
+      document.getElementById("admin-subview-submissions").classList.toggle("hidden", !isSubmissions);
+      document.getElementById("admin-subview-summary").classList.toggle("hidden", isSubmissions);
+
+      document.getElementById("subtab-submissions").className = isSubmissions
+        ? "flex-1 sm:flex-none px-4 py-2 rounded-lg text-sm font-semibold bg-emerald-700 text-white shadow transition flex items-center justify-center gap-2"
+        : "flex-1 sm:flex-none px-4 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-white/60 dark:hover:bg-slate-800 transition flex items-center justify-center gap-2";
+
+      document.getElementById("subtab-summary").className = !isSubmissions
+        ? "flex-1 sm:flex-none px-4 py-2 rounded-lg text-sm font-semibold bg-emerald-700 text-white shadow transition flex items-center justify-center gap-2"
+        : "flex-1 sm:flex-none px-4 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-white/60 dark:hover:bg-slate-800 transition flex items-center justify-center gap-2";
+
+      refreshAdminViews();
+    }
+
+    // สั่งพิมพ์แบบสรุปเสนอ ผอ. (สลับไปหน้าตารางสรุปให้อัตโนมัติหากอยู่หน้าอื่น)
+    function printOfficialSummary() {
+      if (currentAdminSubTab !== "summary") {
+        switchAdminSubTab("summary");
+      }
+      setTimeout(() => window.print(), 100);
+    }
+
+    // อัปเดตข้อมูลทั้ง 2 มุมมองในหลังบ้าน
+    function refreshAdminViews() {
+      renderSubmissionsList();
+      renderSummaryTable();
+    }
+
+    // ================= 5. แสดงรายการงานที่ครูส่ง (กดเปิดลิงก์ได้ทันที) =================
+    function renderSubmissionsList() {
+      const sem = `${document.getElementById("adminSemesterTerm").value}/${document.getElementById("adminAcademicYear").value}`;
+      const dept = document.getElementById("adminDepartment").value;
+      const docTypeFilter = document.getElementById("filterDocType").value;
+      const keyword = document.getElementById("searchSubmissionInput").value.trim().toLowerCase();
+
+      // กรองรายการตามภาคเรียนและกลุ่มสาระฯ ก่อนเพื่อนับจำนวนทั้งหมดในตัวกรองหลัก
+      const baseFiltered = allSubmissions.filter(s => {
+        const matchSem = s.semester === sem;
+        const matchDept = dept === "ALL" || s.department === dept;
+        return matchSem && matchDept;
+      });
+      document.getElementById("subCountBadge").textContent = baseFiltered.length;
+
+      // กรองเพิ่มเติมตามประเภทเอกสารและคำค้นหา
+      const finalFiltered = baseFiltered.filter(s => {
+        const matchDoc = docTypeFilter === "ALL" || s.docType === docTypeFilter;
+        const matchSearch = !keyword ||
+          (s.teacherName && s.teacherName.toLowerCase().includes(keyword)) ||
+          (s.subjectCode && s.subjectCode.toLowerCase().includes(keyword)) ||
+          (s.subjectName && s.subjectName.toLowerCase().includes(keyword)) ||
+          (s.gradeLevel && s.gradeLevel.toLowerCase().includes(keyword));
+        return matchDoc && matchSearch;
+      });
+
+      // เรียงรายการล่าสุดขึ้นก่อน
+      const reversedList = [...finalFiltered].reverse();
+
+      const tbody = document.getElementById("submissionsListBody");
+      tbody.innerHTML = "";
+
+      if (reversedList.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" class="text-center py-8 text-slate-500 dark:text-slate-400">ไม่พบรายการส่งงานที่ตรงกับเงื่อนไขในภาคเรียนที่ ${escapeHtml(sem)}</td></tr>`;
+        return;
+      }
+
+      reversedList.forEach((item, idx) => {
+        const tr = document.createElement("tr");
+        tr.className = "bg-white dark:bg-slate-800 hover:bg-emerald-50/50 dark:hover:bg-slate-700/50 transition";
+
+        const safeUrl = escapeHtml(item.fileUrl);
+        tr.innerHTML = `
+          <td class="py-3 px-3 text-center text-slate-500 dark:text-slate-400">${idx + 1}</td>
+          <td class="py-3 px-3 text-xs text-slate-600 dark:text-slate-300 whitespace-nowrap">${formatThaiDateTime(item.timestamp)}</td>
+          <td class="py-3 px-3">
+            <div class="font-semibold text-slate-800 dark:text-white">${escapeHtml(item.teacherName)}</div>
+            <div class="text-xs text-slate-500 dark:text-slate-400">${escapeHtml(item.position)} • ${escapeHtml(item.department)}</div>
+          </td>
+          <td class="py-3 px-3">
+            <span class="inline-block px-2.5 py-1 rounded-md text-xs font-medium bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+              ${escapeHtml(item.docType)}
+            </span>
+          </td>
+          <td class="py-3 px-3">
+            <div class="font-medium text-slate-800 dark:text-slate-200">${escapeHtml(item.subjectCode)} ${escapeHtml(item.subjectName)}</div>
+            <div class="text-xs text-slate-500 dark:text-slate-400">ระดับชั้น ${escapeHtml(item.gradeLevel)}</div>
+          </td>
+          <td class="py-3 px-3 text-center">
+            <div class="flex items-center justify-center gap-1.5">
+              <a href="${safeUrl}" target="_blank" rel="noopener noreferrer"
+                 class="inline-flex items-center gap-1 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-medium px-3 py-1.5 rounded-lg shadow-sm transition">
+                <span>เปิดดูงาน</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+              <button onclick="copyWorkLink('${safeUrl}')" title="คัดลอกลิงก์"
+                class="p-1.5 rounded-lg border border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function copyWorkLink(url) {
+      navigator.clipboard.writeText(url).then(() => {
+        Swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'success',
+          title: 'คัดลอกลิงก์เรียบร้อยแล้ว',
+          showConfirmButton: false,
+          timer: 1800
+        });
+      });
+    }
+
+    // ================= 6. สร้างตารางสรุปผลหลังบ้าน (สำหรับพิมพ์เสนอ ผอ.) =================
     function renderSummaryTable() {
       const sem = `${document.getElementById("adminSemesterTerm").value}/${document.getElementById("adminAcademicYear").value}`;
       const dept = document.getElementById("adminDepartment").value;
@@ -551,7 +767,6 @@
       document.getElementById("printSemesterLabel").textContent = sem;
       document.getElementById("printDeptLabel").textContent = dept === "ALL" ? "ทุกกลุ่มสาระการเรียนรู้" : dept;
 
-      // รวมรายชื่อครูจากทั้งชีต Teachers (ถ้ามี) และรายชื่อครูที่ส่งงานเข้ามาจริงในภาคเรียนนั้น
       const teacherMap = new Map();
 
       allTeachers.forEach(t => {
@@ -579,7 +794,7 @@
       tbody.innerHTML = "";
 
       if (mergedTeachers.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="10" class="text-center py-6 text-slate-500 dark:text-slate-400">ยังไม่มีข้อมูลการส่งงานในภาคเรียนที่ ${sem}</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="10" class="text-center py-6 text-slate-500 dark:text-slate-400">ยังไม่มีข้อมูลการส่งงานในภาคเรียนที่ ${escapeHtml(sem)}</td></tr>`;
         return;
       }
 
@@ -588,8 +803,8 @@
         tr.className = "hover:bg-emerald-50/40 dark:hover:bg-slate-700/40";
         let cellsHtml = `
           <td class="border border-slate-400 dark:border-slate-600 py-1.5 px-2 text-center">${idx + 1}</td>
-          <td class="border border-slate-400 dark:border-slate-600 py-1.5 px-3">${teacher.name}</td>
-          <td class="border border-slate-400 dark:border-slate-600 py-1.5 px-2 text-center">${teacher.position}</td>
+          <td class="border border-slate-400 dark:border-slate-600 py-1.5 px-3">${escapeHtml(teacher.name)}</td>
+          <td class="border border-slate-400 dark:border-slate-600 py-1.5 px-2 text-center">${escapeHtml(teacher.position)}</td>
         `;
 
         DOC_TYPES.forEach(docType => {
@@ -603,7 +818,7 @@
             const safeData = encodeURIComponent(JSON.stringify(matches));
             cellsHtml += `
               <td class="border border-slate-400 dark:border-slate-600 py-1.5 px-1 text-center font-bold text-emerald-700 dark:text-emerald-400 cursor-pointer hover:bg-emerald-100 dark:hover:bg-emerald-900/50"
-                  onclick="inspectSubmissions('${teacher.name}', '${docType}', '${safeData}')">
+                  onclick="inspectSubmissions('${escapeHtml(teacher.name)}', '${escapeHtml(docType)}', '${safeData}')">
                 ✓ ${matches.length > 1 ? `(${matches.length})` : ''}
               </td>`;
           } else {
@@ -624,9 +839,9 @@
         listHtml += `
           <div class="p-2.5 bg-slate-50 rounded-lg border border-slate-200 flex justify-between items-center gap-2">
             <div>
-              <div class="font-semibold text-slate-800">${i + 1}. ${item.subjectCode} ${item.subjectName} (${item.gradeLevel})</div>
+              <div class="font-semibold text-slate-800">${i + 1}. ${escapeHtml(item.subjectCode)} ${escapeHtml(item.subjectName)} (${escapeHtml(item.gradeLevel)})</div>
             </div>
-            <a href="${item.fileUrl}" target="_blank" class="shrink-0 bg-emerald-700 text-white text-xs px-3 py-1.5 rounded-md hover:bg-emerald-800">
+            <a href="${escapeHtml(item.fileUrl)}" target="_blank" rel="noopener noreferrer" class="shrink-0 bg-emerald-700 text-white text-xs px-3 py-1.5 rounded-md hover:bg-emerald-800">
               เปิดลิงก์
             </a>
           </div>`;
